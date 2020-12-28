@@ -12,20 +12,23 @@ namespace samo.Data.ExTensions
         public static void Seed(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<MakeMoney>().HasData(
-                new MakeMoney() { Id=1,Name="Ăn uống",Description="chiphi",Img="eating.png",Status=true,},
-                new MakeMoney() { Id = 2, Name = "Quần áo", Description = "chiphi", Img = "clothes.png", Status = true, },
-                new MakeMoney() { Id = 3, Name = "Hoa quả", Description = "chiphi", Img = "fruit.png", Status = true, },
-                new MakeMoney() { Id = 4, Name = "Giao thông", Description = "chiphi", Img = "traffic.png", Status = true, },
-                new MakeMoney() { Id = 5, Name = "Nhà ở", Description = "chiphi", Img = "house.png", Status = true, }
+ 
+
+
+                 new MakeMoney() { Id = 1, Name = "Cho thuê", Description = "thunhap", Img = "lease.png", Status = true, },
+                 new MakeMoney() { Id = 2, Name = "Quyên góp", Description = "thunhap", Img = "donation.png", Status = true, },
+                 new MakeMoney() { Id = 3, Name = "Bán hàng", Description = "thunhap", Img = "sell.png", Status = true, },
+                 new MakeMoney() { Id = 4, Name = "Cổ tức", Description = "thunhap", Img = "devidend.png", Status = true, },
+                 new MakeMoney() { Id = 5, Name = "Hoàn tiền", Description = "thunhap", Img = "refund.png", Status = true, },
+                 new MakeMoney() { Id = 6, Name = "Tiền lương", Description = "thunhap", Img = "salary.png", Status = true, }
             );
 
             modelBuilder.Entity<Spend>().HasData(
-                 new Spend() { Id = 1, Name = "Cho thuê", Description = "thunhap", Img = "lease.png", Status = true, },
-                 new Spend() { Id = 2, Name = "Quyên góp", Description = "thunhap", Img = "donation.png", Status = true, },
-                 new Spend() { Id = 3, Name = "Bán hàng", Description = "thunhap", Img = "sell.png", Status = true, },
-                 new Spend() { Id = 4, Name = "Cổ tức", Description = "thunhap", Img = "devidend.png", Status = true, },
-                 new Spend() { Id = 5, Name = "Hoàn tiền", Description = "thunhap", Img = "refund.png", Status = true, },
-                 new Spend() { Id = 6, Name = "Tiền lương", Description = "thunhap", Img = "salary.png", Status = true, }
+                new Spend() { Id = 1, Name = "Ăn uống", Description = "chiphi", Img = "eating.png", Status = true, },
+                new Spend() { Id = 2, Name = "Quần áo", Description = "chiphi", Img = "clothes.png", Status = true, },
+                new Spend() { Id = 3, Name = "Hoa quả", Description = "chiphi", Img = "fruit.png", Status = true, },
+                new Spend() { Id = 4, Name = "Giao thông", Description = "chiphi", Img = "traffic.png", Status = true, },
+                new Spend() { Id = 5, Name = "Nhà ở", Description = "chiphi", Img = "house.png", Status = true, }
                 );
 
             var roleId = new Guid("8D04DCE2-969A-435D-BBA4-DF3F325983DC");

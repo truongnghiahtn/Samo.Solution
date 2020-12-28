@@ -16,7 +16,6 @@ namespace samo.Data.Configurations
             builder.Property(x => x.Id).UseIdentityColumn();
             builder.Property(x => x.Money).IsRequired();
             builder.Property(x => x.Description).IsRequired().HasMaxLength(200);
-            builder.Property(x=>x.DateCreate).HasDefaultValueSql("CURRENT_TIMESTAMP");
             builder.HasOne(x => x.AppUser).WithMany(x => x.RegisterSpends).HasForeignKey(x => x.IdUser);
             builder.HasOne(x => x.Spend).WithMany(x => x.RegisterSpends).HasForeignKey(x => x.IdSpend);
         }

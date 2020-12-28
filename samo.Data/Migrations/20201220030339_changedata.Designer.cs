@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using samo.Data.FE;
 
 namespace samo.Data.Migrations
 {
     [DbContext(typeof(samoDbContext))]
-    partial class samoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201220030339_changedata")]
+    partial class changedata
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
