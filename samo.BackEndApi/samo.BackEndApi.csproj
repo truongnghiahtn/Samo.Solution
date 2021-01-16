@@ -2,6 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>923e3b39-dc9b-459a-b813-2fca7a21a77b</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.10" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\samo.Aplication\samo.Aplication.csproj" />
+    <ProjectReference Include="..\samo.Data\samo.Data.csproj" />
+  </ItemGroup>
 
 </Project>

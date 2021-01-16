@@ -9,11 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Domain", "2.Domain", "{11
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Infrastructure", "1.Infrastructure", "{07E0BA88-99BA-4541-9985-BF0467F56CF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "samo.BackEndApi", "samo.BackEndApi\samo.BackEndApi.csproj", "{0F1E5A8B-82EA-4C02-8332-C67EF9E23EDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "samo.BackEndApi", "samo.BackEndApi\samo.BackEndApi.csproj", "{0F1E5A8B-82EA-4C02-8332-C67EF9E23EDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "samo.Data", "samo.Data\samo.Data.csproj", "{49D6524C-D5FF-4F02-B90F-4AF6AED973CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "samo.Data", "samo.Data\samo.Data.csproj", "{49D6524C-D5FF-4F02-B90F-4AF6AED973CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "samo.Aplication", "samo.Aplication\samo.Aplication.csproj", "{66EB990A-034C-478C-B690-9D5D90CCAC6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "samo.Aplication", "samo.Aplication\samo.Aplication.csproj", "{66EB990A-034C-478C-B690-9D5D90CCAC6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "samo.Untilities", "samo.Exception\samo.Untilities.csproj", "{DF99088A-4883-4088-941C-07E0AF16F20F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{66EB990A-034C-478C-B690-9D5D90CCAC6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66EB990A-034C-478C-B690-9D5D90CCAC6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66EB990A-034C-478C-B690-9D5D90CCAC6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF99088A-4883-4088-941C-07E0AF16F20F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF99088A-4883-4088-941C-07E0AF16F20F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF99088A-4883-4088-941C-07E0AF16F20F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF99088A-4883-4088-941C-07E0AF16F20F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +47,7 @@ Global
 		{0F1E5A8B-82EA-4C02-8332-C67EF9E23EDF} = {F2125F48-63E8-43B4-B8DB-E9509C8B7289}
 		{49D6524C-D5FF-4F02-B90F-4AF6AED973CB} = {11022A16-0B79-45BD-9A75-E6250721ECE8}
 		{66EB990A-034C-478C-B690-9D5D90CCAC6C} = {11022A16-0B79-45BD-9A75-E6250721ECE8}
+		{DF99088A-4883-4088-941C-07E0AF16F20F} = {07E0BA88-99BA-4541-9985-BF0467F56CF2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3007037A-6F03-4940-AD77-5CE294F8058A}
