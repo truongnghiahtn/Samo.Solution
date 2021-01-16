@@ -23,7 +23,8 @@ namespace samo.BackEndApi.Controllers
         }
 
         [HttpGet("All")]
-     
+        [AllowAnonymous]
+
         public async Task<IActionResult> GetAll()
         {
 
@@ -78,6 +79,24 @@ namespace samo.BackEndApi.Controllers
         {
 
             var service = await _serviceSpend.GetById(IdSpend);
+            return Ok(service);
+        }
+
+        [HttpGet("idUser")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetByIdUSer(Guid IdUSer)
+        {
+
+            var service = await _serviceSpend.GetByUser(IdUSer);
+            return Ok(service);
+        }
+
+        [HttpGet("Chart")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetChart(Guid idUser, int month)
+        {
+
+            var service = await _serviceSpend.GetChartByUser(idUser,month);
             return Ok(service);
         }
     }

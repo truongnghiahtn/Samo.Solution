@@ -1,4 +1,5 @@
 ﻿using samo.Aplication.ViewModel.Common;
+using samo.Aplication.ViewModel.Register;
 using samo.Aplication.ViewModel.Service;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,8 @@ namespace samo.Aplication.ServiceSamo.ServiceSpend
         Task<ApiResult<bool>> Update(RequestUpdate request);
         Task<ApiResult<bool>> Create(RequestCreate request);
         Task<ApiResult<ServicesVm>> GetById(int IdSpend);
+        Task<ApiResult<PageResult<ListSpend<SpendVm>>>> GetByUser(Guid idUser);
+
+        Task<ApiResult<PageResult<ChartVm>>> GetChartByUser(Guid idUser, int Month);
     }
 }

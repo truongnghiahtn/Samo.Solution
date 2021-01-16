@@ -17,7 +17,7 @@ namespace samo.Data.Configurations
             builder.Property(x => x.Money).IsRequired();
             builder.Property(x => x.Description).IsRequired().HasMaxLength(200);
             builder.HasOne(x => x.AppUser).WithMany(x => x.RegisterMakeMoneys).HasForeignKey(x => x.IdUser);
-            builder.HasOne(x => x.makeMoney).WithMany(x => x.RegisterMakeMoneys).HasForeignKey(x => x.IdMakeMoney);
+            builder.HasOne(x => x.MakeMoney).WithMany(x => x.RegisterMakeMoneys).HasForeignKey(x => x.IdMakeMoney);
         }
     }
 }

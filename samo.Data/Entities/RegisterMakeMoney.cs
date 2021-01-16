@@ -20,6 +20,6 @@ namespace samo.Data.Entities
 
         public AppUser AppUser { get; set; }
 
-        public MakeMoney makeMoney { get; set; }
+        public MakeMoney MakeMoney { get; set; }
     }
 }

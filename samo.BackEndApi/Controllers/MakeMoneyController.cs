@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
 using samo.Aplication.ServiceSamo.ServiceMakeMoney;
 using samo.Aplication.ViewModel.Service;
 using System;
@@ -13,7 +12,7 @@ namespace samo.BackEndApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "admin")]
+    [Authorize]
     public class MakeMoneyController : ControllerBase
     {
         private readonly IServiceMakeMoney _ServiceMakeMoney;
@@ -24,8 +23,7 @@ namespace samo.BackEndApi.Controllers
         }
 
         [HttpGet("All")]
-
-        //[AllowAnonymous]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
 
@@ -80,6 +78,24 @@ namespace samo.BackEndApi.Controllers
         {
 
             var service = await _ServiceMakeMoney.GetById(IdMakeMoney);
+            return Ok(service);
+        }
+
+        [HttpGet("idUser")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetByIdUSer(Guid IdUSer)
+        {
+
+            var service = await _ServiceMakeMoney.GetByUser(IdUSer);
+            return Ok(service);
+        }
+
+        [HttpGet("Chart")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetChart(Guid idUser, int month)
+        {
+
+            var service = await _ServiceMakeMoney.GetChartByUser(idUser, month);
             return Ok(service);
         }
     }
