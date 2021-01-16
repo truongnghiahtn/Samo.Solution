@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using samo.Data.Entities;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
+using samo.Aplication.ViewModel.Service;
 
 namespace samo.Aplication.ServiceSamo.ServiceRegister
 {
@@ -73,7 +74,7 @@ namespace samo.Aplication.ServiceSamo.ServiceRegister
             return new ApiSuccessResult<bool>();
         }
 
-        public async Task<ApiResult<bool>> Delete(int idService, string type)
+        public async Task<ApiResult<bool>> Delete(int id, string type)
         {
             if (type != "chiphi" && type != "thunhap")
             {
@@ -81,7 +82,7 @@ namespace samo.Aplication.ServiceSamo.ServiceRegister
             }
             if (type == "chiphi")
             {
-                var data = await _context.RegisterSpends.FindAsync(idService);
+                var data = await _context.RegisterSpends.FindAsync(id);
                 if (data == null)
                 {
                     return new ApiErrorResult<bool>("không thành công");
@@ -100,7 +101,7 @@ namespace samo.Aplication.ServiceSamo.ServiceRegister
 
             if (type == "thunhap")
             {
-                var data = await _context.RegisterMakeMoneys.FindAsync(idService);
+                var data = await _context.RegisterMakeMoneys.FindAsync(id);
                 if (data == null)
                 {
                     return new ApiErrorResult<bool>("không thành công");
@@ -172,6 +173,41 @@ namespace samo.Aplication.ServiceSamo.ServiceRegister
             return new ApiSuccessResult<RegisterDetailVm>(registerDetailVm);
         }
 
+        public async Task<ApiResult<PageResult<ChartVm>>> GetChartByUser(Guid idUser, int Month)
+        {
+            var query1 = from rmm in _context.RegisterMakeMoneys
+                        where rmm.IdUser == idUser && rmm.DateCreate.Month == Month
+                        select new {rmm };
+            var makemoney = query1.Select(x => x.rmm.Money).Sum();
+            var query2 = from rs in _context.RegisterSpends
+                         where rs.IdUser == idUser && rs.DateCreate.Month == Month
+                         select new { rs };
+            var spend = query2.Select(x => x.rs.Money).Sum();
+
+            var data = new List<ChartVm>(){
+
+                new ChartVm()
+                {
+                    Name="Thu nhập",
+                    Value=makemoney,
+                    Percent=(double)(makemoney/(makemoney+spend)*100)
+                },
+                new ChartVm()
+                {
+                    Name="Chi tiêu",
+                    Value=spend,
+                    Percent=(double)(spend/(makemoney+spend)*100)
+                }
+            };
+
+            var result = new PageResult<ChartVm>()
+            {
+                Items = data,
+                TotalRecords = 2
+            };
+            return new ApiSuccessResult<PageResult<ChartVm>>(result);
+        }
+
         public async Task<ApiResult<PageResult<RegisterByDate<RegisterVm>>>> GetRegister(Guid idUser)
         {
 
@@ -188,7 +224,7 @@ namespace samo.Aplication.ServiceSamo.ServiceRegister
                                         Money = rmm.Money,
                                         Type = mm.Description,
                                         DateCreate = rmm.DateCreate,
-                                        DateCreateToString = rmm.DateCreate.ToString(),
+                                        DateCreateToString = rmm.DateCreate.ToString("dd-MM-yyyy HH:mm:ss"),
                                     };
 
             var registerSpend = from rs in _context.RegisterSpends
@@ -202,14 +238,14 @@ namespace samo.Aplication.ServiceSamo.ServiceRegister
                                     Money = rs.Money,
                                     Type = s.Description,
                                     DateCreate = rs.DateCreate,
-                                    DateCreateToString = rs.DateCreate.ToString(),
+                                    DateCreateToString = rs.DateCreate.ToString("dd-MM-yyyy HH:mm:ss"),
                                 };
 
             List<RegisterVm> myList = new List<RegisterVm>();
             myList.AddRange(registerMakeMoney);
             myList.AddRange(registerSpend);
 
-            var date = myList.Select(x => x.DateCreate.Date).Distinct();
+            var date = myList.OrderByDescending(x=>x.DateCreate).Select(x => x.DateCreate.Date).Distinct();
 
             if (myList.Count == 0)
             {
@@ -217,7 +253,7 @@ namespace samo.Aplication.ServiceSamo.ServiceRegister
             }
             var data =  date.Select(x => new RegisterByDate<RegisterVm>()
             {
-                DateCreate = x.Date,
+                DateCreate = x.Date.ToString("dd-MM-yyyy"),
                 Data = myList.Where(y => y.DateCreate > x.Date && y.DateCreate <= x.Date.AddDays(1)).Select(n => new RegisterVm()
                 {
                     Id = n.Id,

@@ -58,9 +58,9 @@ namespace samo.BackEndApi.Controllers
         [HttpGet]
         [AllowAnonymous]
 
-        public async Task<IActionResult> GetById(string userName)
+        public async Task<IActionResult> GetById(Guid id)
         {
-            var data = await _serviceUser.GetUserById(userName);
+            var data = await _serviceUser.GetUserById(id);
             return Ok(data);
         }
 

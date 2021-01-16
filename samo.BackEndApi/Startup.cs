@@ -40,7 +40,13 @@ namespace samo.BackEndApi
             services.AddDbContext<samoDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("samoDb")));
 
-            services.AddIdentity<AppUser, AppRole>()
+            services.AddIdentity<AppUser, AppRole>(options=> {
+                options.Password.RequiredLength = 1;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+            })
                .AddEntityFrameworkStores<samoDbContext>()
                .AddDefaultTokenProviders();
 

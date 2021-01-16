@@ -92,6 +92,67 @@ namespace samo.Aplication.ServiceSamo.ServiceMakeMoney
             return new ApiSuccessResult<ServicesVm>(data);
         }
 
+        public async Task<ApiResult<PageResult<ListMakeMoney<MakeMoneyVm>>>> GetByUser(Guid idUser)
+        {
+            var query = from rmm in _context.RegisterMakeMoneys
+                        join mm in _context.MakeMoneys on rmm.IdMakeMoney equals mm.Id
+                        where rmm.IdUser == idUser
+                        select new { rmm, mm };
+            var type = query.Select(x => new {name=x.mm.Name,img=x.mm.Img }).Distinct().ToList();
+
+            var data = type.Select(x => new ListMakeMoney<MakeMoneyVm>()
+            {
+                Type = x.name,
+                Img = x.img,
+                Data = query.Where(y => y.mm.Name == x.name).Select(n => new MakeMoneyVm()
+                {
+                    Id = n.rmm.Id,
+                    Description = n.rmm.Description,
+                    Money = n.rmm.Money,
+                    DateCreate = n.rmm.DateCreate.ToString("dd-MM-yyyy")
+                }).ToList()
+            }).ToList();
+
+            var result = new PageResult<ListMakeMoney<MakeMoneyVm>>()
+            {
+                Items = data,
+                TotalRecords = data.Count()
+
+            };
+
+            return new ApiSuccessResult<PageResult<ListMakeMoney<MakeMoneyVm>>>(result);
+        }
+
+        public async  Task<ApiResult<PageResult<ChartVm>>> GetChartByUser(Guid idUser, int Month)
+        {
+            var query = from rmm in _context.RegisterMakeMoneys
+                        join mm in _context.MakeMoneys on rmm.IdMakeMoney equals mm.Id
+                        where rmm.IdUser == idUser && rmm.DateCreate.Month == Month
+                        select new {mm,rmm};
+            var data = query.ToList().GroupBy(l => l.mm.Name)
+                .Select(x => new
+                {
+                   name = x.First().mm.Name,
+                    value = x.Sum(c => c.rmm.Money)
+                }).ToList();
+
+            decimal Sum = data.Sum(x => x.value);
+
+            var result = data.Select(x => new ChartVm()
+            {
+                Name = x.name,
+                Value = x.value,
+                Percent = (double)(x.value / Sum)*100
+            }).ToList();
+            var result1 = new PageResult<ChartVm>()
+            {
+                Items = result,
+                TotalRecords = data.Count()
+            };
+
+            return new ApiSuccessResult<PageResult<ChartVm>>(result1);
+        }
+
         public async Task<ApiResult<bool>> Update(RequestUpdate request)
         {
             var makeMoney = await _context.MakeMoneys.FindAsync(request.Id);

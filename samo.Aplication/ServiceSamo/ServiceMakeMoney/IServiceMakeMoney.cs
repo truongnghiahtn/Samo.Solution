@@ -14,6 +14,9 @@ namespace samo.Aplication.ServiceSamo.ServiceMakeMoney
         Task<ApiResult<bool>> Update(RequestUpdate request);
         Task<ApiResult<bool>> Create(RequestCreate  request);
         Task<ApiResult<ServicesVm>> GetById(int IdMakeMoney);
+        Task<ApiResult<PageResult<ListMakeMoney<MakeMoneyVm>>>> GetByUser(Guid idUser);
+
+        Task<ApiResult<PageResult<ChartVm>>> GetChartByUser(Guid idUser, int Month);
 
     }
 }

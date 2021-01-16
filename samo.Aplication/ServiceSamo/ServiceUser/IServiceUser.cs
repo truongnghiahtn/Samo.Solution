@@ -11,6 +11,6 @@ namespace samo.Aplication.ServiceSamo.ServiceUser
     {
         Task<ApiResult<ResultLogin>> LoginUser(LoginUser request);
         Task<ApiResult<bool>> RegisterUser(RequestUser request);
-        Task<ApiResult<UserVm>> GetUserById(string userName);
+        Task<ApiResult<UserVm>> GetUserById(Guid id);
     }
 }

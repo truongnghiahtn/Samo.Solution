@@ -37,6 +37,8 @@ namespace samo.BackEndApi.Controllers
             return Ok(data);
         }
 
+  
+
         [HttpPost]
         public async Task<IActionResult> CreateRegisters([FromBody] RequestRegisterCreate request)
         {
@@ -68,9 +70,9 @@ namespace samo.BackEndApi.Controllers
             return Ok(result);
         }
         [HttpDelete]
-        public async Task<IActionResult> DeleteRegisters(int idService, string type)
+        public async Task<IActionResult> DeleteRegisters(int id, string type)
         {
-            var result = await _serviceRegister.Delete(idService,type);
+            var result = await _serviceRegister.Delete(id,type);
             if (!result.IsSuccessed)
             {
                 return BadRequest(result.Message);
@@ -78,8 +80,14 @@ namespace samo.BackEndApi.Controllers
             return Ok(result);
         }
 
+        [HttpGet("Chart")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetChart(Guid idUser, int month)
+        {
 
-
+            var service = await _serviceRegister.GetChartByUser(idUser, month);
+            return Ok(service);
+        }
     }
    
 }
